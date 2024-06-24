@@ -10,9 +10,9 @@ import (
 )
 
 func main() {
-	fmt.Println("I am thinking of a number between 0-99 (inclusive).")
+	fmt.Println("I am thinking of a number between 0-999 (inclusive).")
 	fmt.Println("Type in your guess. I will tell you 'higher' or 'lower' until you are correct!")
-	answer := rand.Intn(100)
+	answer := rand.Intn(1000)
 	br := bufio.NewReader(os.Stdin)
 	tries := 0
 	for {
@@ -32,7 +32,7 @@ func main() {
 			continue
 		}
 		if guess == answer {
-			fmt.Printf("Correct! I was thinking of %d!\n", answer)
+			fmt.Printf("\nCorrect! I was thinking of %d!\n", answer)
 			fmt.Printf("Guesses: %d\n", tries)
 			return
 		}
