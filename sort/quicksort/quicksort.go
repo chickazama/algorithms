@@ -13,16 +13,47 @@ const (
 
 func main() {
 	if len(os.Args) < minArgc {
-		log.Fatalf("invalid argument count. expected: %d. actual: %d.\n", minArgc, len(os.Args))
+		log.Fatalf("invalid argument count. expected: >= %d. actual: %d.\n", minArgc, len(os.Args))
 	}
-	var data []int
 	argv := os.Args[1:]
+	data := convert(argv)
+	fmt.Println("Input:")
+	fmt.Println(data)
+	quicksort(data, 0, len(data)-1)
+	fmt.Println("Output:")
+	fmt.Println(data)
+}
+
+func convert(argv []string) []int {
+	var data []int
 	for _, arg := range argv {
 		v, err := strconv.Atoi(arg)
 		if err != nil {
-			log.Fatalf("invalid argument: %s. expects integers.\n", arg)
+			log.Fatalf("invalid argument: %s. expects integers only.\n", arg)
 		}
 		data = append(data, v)
 	}
-	fmt.Println(data)
+	return data
+}
+
+func quicksort(data []int, min, max int) {
+	if min >= max || min < 0 {
+		return
+	}
+	pivotIdx := partition(data, min, max)
+	quicksort(data, min, pivotIdx-1)
+	quicksort(data, pivotIdx+1, max)
+}
+
+func partition(data []int, min, max int) int {
+	pivot := data[max]
+	idx := min
+	for i := idx; i < max; i++ {
+		if data[i] < pivot {
+			data[idx], data[i] = data[i], data[idx]
+			idx++
+		}
+	}
+	data[idx], data[max] = data[max], data[idx]
+	return idx
 }
