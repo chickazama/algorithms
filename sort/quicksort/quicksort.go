@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
+
+	"github.com/chickazama/algorithms/sort/core"
 )
 
 const (
@@ -16,24 +17,12 @@ func main() {
 		log.Fatalf("invalid argument count. expected: >= %d. actual: %d.\n", minArgc, len(os.Args))
 	}
 	argv := os.Args[1:]
-	data := convert(argv)
+	data := core.Convert(argv)
 	fmt.Println("Input:")
 	fmt.Println(data)
 	quicksort(data, 0, len(data)-1)
 	fmt.Println("Output:")
 	fmt.Println(data)
-}
-
-func convert(argv []string) []int {
-	var data []int
-	for _, arg := range argv {
-		v, err := strconv.Atoi(arg)
-		if err != nil {
-			log.Fatalf("invalid argument: %s. expects integers only.\n", arg)
-		}
-		data = append(data, v)
-	}
-	return data
 }
 
 func quicksort(data []int, min, max int) {
