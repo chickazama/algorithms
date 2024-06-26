@@ -11,3 +11,9 @@ previous element does not violate the ordering.
 
 2. The output is a permutation - i.e. all the data from the input is re-ordered,
 with no missing elements.
+
+## Implementation Information
+
+All of the sorting algorithms implemented here take in the array of command-line
+arguments as the input data. Each argument is parsed into a 32-bit integer, and
+then sorted in ascending order.
