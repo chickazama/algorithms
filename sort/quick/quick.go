@@ -35,8 +35,13 @@ func quicksort(data []int, min, max int) {
 }
 
 func partition(data []int, min, max int) int {
+	// Set the last element of the array as the pivot
 	pivot := data[max]
+	// Set the min index of the partition as the iteration start
 	idx := min
+	// Iterate through the partition
+	// If the element value is less than that of the pivot,
+	// Swap it into next available left-most position
 	for i := idx; i < max; i++ {
 		if data[i] < pivot {
 			data[idx], data[i] = data[i], data[idx]
